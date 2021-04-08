@@ -37,7 +37,6 @@ function verificarAprovacaoChange(sysId) {
                 console.log('Mudança aprovada no ServiceNow!');
             case 'rejected':
                 console.log('Mudança rejeitada no ServiceNow.');
-            case 'requested':
             default:
                 console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns minutos.');
                 setTimeout(function () { verificarAprovacaoChange(sysId); }, intervalMinutes * 60000);
