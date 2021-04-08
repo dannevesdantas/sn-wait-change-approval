@@ -1,0 +1,24 @@
+{
+  "name": "sn-wait-change-approval",
+  "version": "1.0.0",
+  "description": "Github Action to wait for a change request to be approved on ServiceNow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannevesdantas/sn-wait-change-approval.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannevesdantas/sn-wait-change-approval/issues"
+  },
+  "homepage": "https://github.com/dannevesdantas/sn-wait-change-approval#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "axios": "^0.21.1"
+  }
+}
