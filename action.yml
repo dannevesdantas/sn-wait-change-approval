@@ -13,7 +13,7 @@ inputs:
     required: true
   interval:
     description: 'Interval between approval verifications in minutes'
-    required: true
+    required: false
     default: 1
 runs:
   using: 'node12'
