@@ -1,24 +1,17 @@
 const core = require('@actions/core');
 const axios = require('axios');
 
+var instanceUrl;
+var sysId;
+var intervalMinutes;
+
 try {
-    // `who-to-greet` input defined in action metadata file
-    const instanceUrl = core.getInput('instance-url');
-    //console.log(`Instance Url is ${instanceUrl}!`);
-    const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    //const payload = JSON.stringify(github.context.payload, undefined, 2)
-    //console.log(`The event payload: ${payload}`);
+    instanceUrl = core.getInput('instance-url');
+    sysId = core.getInput('sys_id');
+    intervalMinutes = core.getInput('interval');
 } catch (error) {
     core.setFailed(error.message);
 }
-
-// teste Danilo
-
-const instanceUrl = core.getInput('instance-url');
-const sysId = core.getInput('sys_id');
-const intervalMinutes = core.getInput('interval');
 
 verificarAprovacaoChange(sysId);
 
