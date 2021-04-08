@@ -1,0 +1,20 @@
+name: 'ssn-wait-change-approval'
+description: 'Github Action to wait for a change request to be approved on ServiceNow.'
+author: 'dannevesdantas'
+branding:
+  color: purple
+  icon: clock
+inputs:
+  instance-url:
+    description: 'ServiceNow instance URL'
+    required: true
+  sys_id:
+    description: 'Change Unique record identifier'
+    required: true
+  interval:
+    description: 'Interval between approval verifications in minutes'
+    required: true
+    default: 1
+runs:
+  using: 'node12'
+  main: 'index.js'
