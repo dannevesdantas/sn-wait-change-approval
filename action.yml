@@ -5,9 +5,15 @@ branding:
   color: purple
   icon: clock
 inputs:
-  instance-url:
+  server:
     description: 'ServiceNow instance URL'
     required: true
+  username:
+    description: 'ServiceNow username'
+    required: false
+  password:
+    description: 'ServiceNow password'
+    required: false
   sys_id:
     description: 'Change Unique record identifier'
     required: true
