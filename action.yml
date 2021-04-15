@@ -14,13 +14,36 @@ inputs:
   password:
     description: 'ServiceNow password'
     required: false
-  sys_id:
-    description: 'Change Unique record identifier'
+  table_name:
+    description: 'Supply the technical table name in which to search.'
     required: true
-  interval:
-    description: 'Interval between approval verifications in minutes'
+  sys_id:
+    description: 'The technical id of the task.'
+    required: true
+  polling_interval:
+    description: 'Polling interval in seconds.'
+    required: true
+  status_field:
+    description: 'The technical name of a field to check.'
+    required: true
+  status_to_check_for:
+    description: 'The display value to look for in the field.'
+    required: true
+  finished_status:
+    description: 'If status is this value, consider this done'
     required: false
-    default: 5
+  aborted_status:
+    description: 'If status is this value, consider this aborted'
+    required: false
+  timeout:
+    description: 'Maximum time in seconds before timing out. ( 0 = never times out)'
+    required: false
+    default: 0
+  skip_on_timeout:
+    description: 'Skip this gate if waiting times out'
+    required: false
+    default: false
+  
 runs:
   using: 'node12'
   main: 'index.js'
