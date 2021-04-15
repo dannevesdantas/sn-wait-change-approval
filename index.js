@@ -5,14 +5,14 @@ var server;
 var sysId;
 var username;
 var password;
-var intervalMinutes;
+var pollingInterval;
 
 try {
     server = core.getInput('server');
     sysId = core.getInput('sys_id');
     username = core.getInput('username');
     password = core.getInput('password');
-    intervalMinutes = core.getInput('interval');
+    pollingInterval = core.getInput('polling_interval');
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -47,12 +47,12 @@ function verificarAprovacaoChange(sysId) {
                 core.setFailed('Mudança rejeitada no ServiceNow.');
                 break;
             default:
-                console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns minutos.');
-                setTimeout(function () { verificarAprovacaoChange(sysId); }, intervalMinutes * 60000);
+                console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns segundos.');
+                setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
         }
 
     }).catch(function (error) {
-        setTimeout(function () { verificarAprovacaoChange(sysId); }, intervalMinutes * 60000);
+        setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
     });
 
 }
