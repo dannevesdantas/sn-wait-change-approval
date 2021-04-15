@@ -21,10 +21,13 @@ function verificarAprovacaoChange(sysId) {
 
     axios({
         method: 'get',
-        url: `${server}/api/sn_chg_rest/change/${sysId}`,
+        url: `${server}/api/now/table/change_request?sysparm_query=sys_id=${sysId}&sysparm_display_value=True&sysparm_input_display_value=True`,
+        auth: {
+            username: username,
+            password: password
+        },
         headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Basic YWRtaW46ajZMdXNxbFUzVUNF'
+            'Accept': 'application/json'
         }
     }).then(function (response) {
         //console.log(JSON.stringify(response.data));
