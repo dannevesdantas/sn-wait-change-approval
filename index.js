@@ -31,15 +31,15 @@ function verificarAprovacaoChange(sysId) {
         }
     }).then(function (response) {
         //console.log(JSON.stringify(response.data));
-        console.log(`Mudança está no status: ${response.data.result.approval.display_value}`);
+        console.log(`Mudança está no status: ${response.data.result.approval}`);
 
-        var approvalStatus = response.data.result.approval.value;
+        var approvalStatus = response.data.result.approval;
 
         switch (approvalStatus) {
-            case 'approved':
+            case 'Approved':
                 console.log('Mudança aprovada no ServiceNow!');
                 break;
-            case 'rejected':
+            case 'Rejected':
                 core.setFailed('Mudança rejeitada no ServiceNow.');
                 break;
             default:
