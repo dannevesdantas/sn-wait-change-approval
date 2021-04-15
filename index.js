@@ -3,11 +3,15 @@ const axios = require('axios');
 
 var server;
 var sysId;
+var username;
+var password;
 var intervalMinutes;
 
 try {
     server = core.getInput('server');
     sysId = core.getInput('sys_id');
+    username = core.getInput('username');
+    password = core.getInput('password');
     intervalMinutes = core.getInput('interval');
 } catch (error) {
     core.setFailed(error.message);
