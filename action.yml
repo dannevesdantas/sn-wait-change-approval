@@ -38,11 +38,9 @@ inputs:
   timeout:
     description: 'Maximum time in seconds before timing out. ( 0 = never times out)'
     required: false
-    default: 0
   skip_on_timeout:
     description: 'Skip this gate if waiting times out'
     required: false
-    default: false
   
 runs:
   using: 'node12'
