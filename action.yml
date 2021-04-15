@@ -1,5 +1,5 @@
 name: 'sn-wait-for-status'
-description: 'Github Action to wait for an object to reach a given status on ServiceNow.'
+description: 'Github Action to wait for a table record to reach a given status on ServiceNow.'
 author: 'dannevesdantas'
 branding:
   color: purple
