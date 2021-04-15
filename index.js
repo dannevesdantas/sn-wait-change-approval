@@ -35,9 +35,9 @@ function verificarAprovacaoChange(sysId) {
         }
     }).then(function (response) {
         //console.log(JSON.stringify(response.data));
-        console.log(`Mudança está no status: ${response.data.result.approval}`);
+        console.log(`Mudança está no status: ${response.data.result[0].approval}`);
 
-        var approvalStatus = response.data.result.approval;
+        var approvalStatus = response.data.result[0].approval;
 
         switch (approvalStatus) {
             case 'Approved':
