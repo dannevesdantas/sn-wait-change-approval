@@ -1,5 +1,5 @@
-name: 'ssn-wait-change-approval'
-description: 'Github Action to wait for a change request to be approved on ServiceNow.'
+name: 'sn-check-object-status'
+description: 'Github Action to wait for an object to reach a given status on ServiceNow.'
 author: 'dannevesdantas'
 branding:
   color: purple
