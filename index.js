@@ -1,12 +1,12 @@
 const core = require('@actions/core');
 const axios = require('axios');
 
-var instanceUrl;
+var server;
 var sysId;
 var intervalMinutes;
 
 try {
-    instanceUrl = core.getInput('instance-url');
+    server = core.getInput('server');
     sysId = core.getInput('sys_id');
     intervalMinutes = core.getInput('interval');
 } catch (error) {
@@ -21,7 +21,7 @@ function verificarAprovacaoChange(sysId) {
 
     axios({
         method: 'get',
-        url: `${instanceUrl}/api/sn_chg_rest/change/${sysId}`,
+        url: `${server}/api/sn_chg_rest/change/${sysId}`,
         headers: {
             'Accept': 'application/json',
             'Authorization': 'Basic YWRtaW46ajZMdXNxbFUzVUNF'
