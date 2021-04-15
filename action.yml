@@ -14,7 +14,7 @@ inputs:
   interval:
     description: 'Interval between approval verifications in minutes'
     required: false
-    default: 1
+    default: 5
 runs:
   using: 'node12'
   main: 'index.js'
