@@ -41,8 +41,8 @@ function verificarAprovacaoChange(sysId) {
         //console.log(JSON.stringify(response.data));
         console.log(`status_field: ${statusField}`);
         console.log(`status_to_check_for: ${statusToCheckFor}`);
-        console.log(`Valor atual de ${statusField}: ` + response.data.result[0][statusFiel]);
-        console.log(`Comparação: ` + (response.data.result[0][statusFiel] == statusToCheckFor));
+        console.log('Valor atual de statusField: ' + response.data.result[0][statusFiel]);
+        //console.log('Comparação: ' + (response.data.result[0][statusFiel] == statusToCheckFor));
 
         if (response.data.result[0][statusFiel] == statusToCheckFor) {
             console.log('Mudança aprovada no ServiceNow!');
