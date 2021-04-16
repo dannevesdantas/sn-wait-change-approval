@@ -11,6 +11,7 @@ var abortedStatus;
 var username;
 var password;
 var pollingInterval;
+var timeout;
 
 try {
     server = core.getInput('server');
@@ -23,6 +24,7 @@ try {
     username = core.getInput('username');
     password = core.getInput('password');
     pollingInterval = core.getInput('polling_interval');
+    timeout = core.getInput('timeout');
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -36,13 +38,9 @@ function verificarAprovacaoChange(sysId) {
     axios({
         method: 'get',
         url: `${server}/api/now/table/${tableName}?sysparm_query=sys_id=${sysId}&sysparm_display_value=True&sysparm_input_display_value=True`,
-        auth: {
-            username: username,
-            password: password
-        },
-        headers: {
-            'Accept': 'application/json'
-        }
+        auth: { username: username, password: password },
+        headers: { 'Accept': 'application/json' },
+        timeout: timeout
     }).then(function (response) {
         //console.log(JSON.stringify(response.data));
 
