@@ -12,6 +12,7 @@ var username;
 var password;
 var pollingInterval;
 var timeout;
+var skipOnTimeout;
 
 try {
     server = core.getInput('server');
@@ -25,6 +26,7 @@ try {
     password = core.getInput('password');
     pollingInterval = core.getInput('polling_interval');
     timeout = core.getInput('timeout');
+    skipOnTimeout = core.getInput('skip_on_timeout');
 } catch (error) {
     core.setFailed(error.message);
 }
@@ -59,6 +61,13 @@ function verificarAprovacaoChange(sysId) {
         }
 
     }).catch(function (error) {
+
+        if (error.code == "ECONNABORTED" && error.message.includes("timeout")) {
+            if (skipOnTimeout == true) {
+                // Skip
+            }
+        }
+
         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
     });
 
