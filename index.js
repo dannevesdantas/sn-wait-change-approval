@@ -3,6 +3,7 @@ const axios = require('axios');
 
 var server;
 var sysId;
+var tableName;
 var statusField;
 var statusToCheckFor;
 var finishedStatus;
@@ -14,6 +15,7 @@ var pollingInterval;
 try {
     server = core.getInput('server');
     sysId = core.getInput('sys_id');
+    tableName = core.getInput('table_name');
     statusField = core.getInput('status_field');
     statusToCheckFor = core.getInput('status_to_check_for');
     finishedStatus = core.getInput('finished_status');
@@ -33,7 +35,7 @@ function verificarAprovacaoChange(sysId) {
 
     axios({
         method: 'get',
-        url: `${server}/api/now/table/change_request?sysparm_query=sys_id=${sysId}&sysparm_display_value=True&sysparm_input_display_value=True`,
+        url: `${server}/api/now/table/${tableName}?sysparm_query=sys_id=${sysId}&sysparm_display_value=True&sysparm_input_display_value=True`,
         auth: {
             username: username,
             password: password
