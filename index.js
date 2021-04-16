@@ -3,6 +3,8 @@ const axios = require('axios');
 
 var server;
 var sysId;
+var statusField;
+var statusToCheckFor;
 var username;
 var password;
 var pollingInterval;
@@ -10,6 +12,8 @@ var pollingInterval;
 try {
     server = core.getInput('server');
     sysId = core.getInput('sys_id');
+    statusField = core.getInput('status_field');
+    statusToCheckFor = core.getInput('status_to_check_for');
     username = core.getInput('username');
     password = core.getInput('password');
     pollingInterval = core.getInput('polling_interval');
@@ -35,21 +39,25 @@ function verificarAprovacaoChange(sysId) {
         }
     }).then(function (response) {
         //console.log(JSON.stringify(response.data));
-        console.log(`Mudança está no status: ${response.data.result[0].approval}`);
+        console.log(`status_field: ${statusField}`);
+        console.log(`status_to_check_for: ${statusToCheckFor}`);
+        console.log(`camparação: ` + response.data.result[0][statusFiel] == statusToCheckFor);
 
-        var approvalStatus = response.data.result[0].approval;
-
-        switch (approvalStatus) {
-            case 'Approved':
-                console.log('Mudança aprovada no ServiceNow!');
-                break;
-            case 'Rejected':
-                core.setFailed('Mudança rejeitada no ServiceNow.');
-                break;
-            default:
-                console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns segundos.');
-                setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
+        if (response.data.result[0][statusFiel] == statusToCheckFor) {
+            console.log('Mudança aprovada no ServiceNow!');
         }
+
+        // switch (approvalStatus) {
+        //     case 'Approved':
+        //         console.log('Mudança aprovada no ServiceNow!');
+        //         break;
+        //     case 'Rejected':
+        //         core.setFailed('Mudança rejeitada no ServiceNow.');
+        //         break;
+        //     default:
+        //         console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns segundos.');
+        //         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
+        // }
 
     }).catch(function (error) {
         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
