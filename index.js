@@ -62,11 +62,11 @@ function verificarAprovacaoChange(sysId) {
 
     }).catch(function (error) {
 
-        // if (error.code == "ECONNABORTED" && error.message.includes("timeout")) {
-        //     if (skipOnTimeout == true) {
-        //         // Skip
-        //     }
-        // }
+        if (error.code == "ECONNABORTED" && error.message.includes("timeout")) {
+            if (skipOnTimeout == true) {
+                // Skip
+            }
+        }
 
         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
     });
