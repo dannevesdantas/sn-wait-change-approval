@@ -5,6 +5,8 @@ var server;
 var sysId;
 var statusField;
 var statusToCheckFor;
+var finishedStatus;
+var abortedStatus;
 var username;
 var password;
 var pollingInterval;
@@ -14,6 +16,8 @@ try {
     sysId = core.getInput('sys_id');
     statusField = core.getInput('status_field');
     statusToCheckFor = core.getInput('status_to_check_for');
+    finishedStatus = core.getInput('finished_status');
+    abortedStatus = core.getInput('aborted_status');
     username = core.getInput('username');
     password = core.getInput('password');
     pollingInterval = core.getInput('polling_interval');
@@ -41,24 +45,20 @@ function verificarAprovacaoChange(sysId) {
         //console.log(JSON.stringify(response.data));
         console.log(`status_field: ${statusField}`);
         console.log(`status_to_check_for: ${statusToCheckFor}`);
-        console.log('Valor atual de statusField: ' + response.data.result[0][statusField]);
-        console.log('Comparação: ' + (response.data.result[0][statusField] == statusToCheckFor));
+        console.log(`Valor atual do status_field ${statusField}: ${response.data.result[0][statusField]}`);
+        console.log(`Comparação: ${response.data.result[0][statusField] == statusToCheckFor}`);
 
         if (response.data.result[0][statusField] == statusToCheckFor) {
             console.log('Mudança aprovada no ServiceNow!');
+        } else if (response.data.result[0][statusField] == finishedStatus) {
+            console.log('Mudança aprovada no ServiceNow!');
+            // Não precisa encerrar change
+        } else if (response.data.result[0][statusField] == abortedStatus) {
+            core.setFailed('Mudança foi abortada no ServiceNow.');
+        } else {
+            console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns segundos.');
+            setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
         }
-
-        // switch (approvalStatus) {
-        //     case 'Approved':
-        //         console.log('Mudança aprovada no ServiceNow!');
-        //         break;
-        //     case 'Rejected':
-        //         core.setFailed('Mudança rejeitada no ServiceNow.');
-        //         break;
-        //     default:
-        //         console.log('Mudança ainda não foi aprovada. Verificando novamente em alguns segundos.');
-        //         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
-        // }
 
     }).catch(function (error) {
         setTimeout(function () { verificarAprovacaoChange(sysId); }, pollingInterval * 1000);
